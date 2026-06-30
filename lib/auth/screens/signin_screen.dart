@@ -5,6 +5,7 @@ import '../screens/signup_screen.dart';
 import '../screens/widgets/auth_widgets.dart';
 import '../../dashboard/screens/dashboard_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../core/app_strings.dart';
 
 class SigninScreen extends StatelessWidget {
   const SigninScreen({super.key});
@@ -23,14 +24,14 @@ class SigninScreen extends StatelessWidget {
                   children: [
                     AuthHeader(),
                     TextFieldWidget(
-                      labelText: "Email Address",
-                      hintText: "Email",
+                      labelText: AppStrings.emailAddress,
+                      hintText: AppStrings.email,
                       icon: SvgPicture.asset('assets/icons/email.svg'),
                     ),
                     SizedBox(height: 10),
                     TextFieldWidget(
-                      labelText: "Password",
-                      hintText: "Password",
+                      labelText: AppStrings.password,
+                      hintText: AppStrings.password,
                       icon: SvgPicture.asset('assets/icons/lock password.svg'),
                       isPassword: true,
                     ),
@@ -39,14 +40,14 @@ class SigninScreen extends StatelessWidget {
                       child: TextButton(
                         onPressed: () {},
                         child: Text(
-                          "Forget Password",
+                          AppStrings.forgotPassword,
                           style: TextStyle(color: AppColors.textOrange),
                         ),
                       ),
                     ),
                     SizedBox(height: 14),
                     ButtonWidget(
-                      labelText: "Sign In",
+                      labelText: AppStrings.signIn,
                       onPressed: () {
                         Get.to(() => const DashboardScreen());
                       },
@@ -62,7 +63,7 @@ class SigninScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Don't have an account? ",
+                    AppStrings.dontHaveAnAccount,
                     style: TextStyle(color: AppColors.textSecondary),
                   ),
                   TextButton(
@@ -70,7 +71,7 @@ class SigninScreen extends StatelessWidget {
                       Get.to(() => const SignupScreen());
                     },
                     child: Text(
-                      "Sign Up",
+                      AppStrings.signUp,
                       style: TextStyle(color: AppColors.textOrange),
                     ),
                   ),

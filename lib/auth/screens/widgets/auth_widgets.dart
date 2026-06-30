@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/app_colors.dart';
+import '../../../core/app_strings.dart';
 
 class AuthHeader extends StatelessWidget {
   const AuthHeader({super.key});
@@ -12,7 +13,7 @@ class AuthHeader extends StatelessWidget {
           child: Image.asset('assets/images/logo.png', height: 150, width: 150),
         ),
         Text(
-          "Sign In to Betrhealth",
+          AppStrings.signInToApp,
           style: TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.bold,
@@ -20,7 +21,7 @@ class AuthHeader extends StatelessWidget {
           ),
         ),
         Text(
-          "Your smart fitness journey starts here",
+          AppStrings.appTitle,
           style: TextStyle(fontSize: 14, color: AppColors.textPrimary),
         ),
         SizedBox(height: 20),
