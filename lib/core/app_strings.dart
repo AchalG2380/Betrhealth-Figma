@@ -17,4 +17,21 @@ class AppStrings {
   static const String appTitle = "Your smart fitness journey starts here";
   static const String termsW = "By continuing, you agree to our ";
   static const String termsO = "Terms &conditions, Privacy & Cookie Policy.";
+
+  static const String heyUser = "Hey Alexandra07 🙌";
+  static const String readyToCrushTodayGoal = "Ready to Crush Today's Goal";
+  static const String tapToClaim = "Tap To Claim";
+  static const String todaysBoost = "Today’s Boost!";
+  static const String yourProgressThisWeek = "Your Progress This Week";
+  static const String activeGoals = "Active Goals";
+  static const String coinsEarned = "Coins Earned";
+  static const String badges = "Badges";
+
+  static const String ongoingBets = "Ongoing Bets";
+  static const String community = "Community";
+  static const String lossWeight = "Loss weight";
+  static const String lifting = "Lifting";
+  static const String strength = "Strength";
+  static const String cycling = "Cycling";
+  static const String running = "Running";
 }

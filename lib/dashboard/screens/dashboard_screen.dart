@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../core/app_colors.dart';
 import '../screens/widgets/dashboard_widgets.dart';
+import '../../core/app_strings.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -19,7 +20,7 @@ class DashboardScreen extends StatelessWidget {
               DashboardHeader(),
               SizedBox(height: 10),
               Text(
-                "Hey Alexandra07 🙌",
+                AppStrings.heyUser,
                 style: TextStyle(
                   fontSize: 18,
                   color: Colors.white,
@@ -27,7 +28,7 @@ class DashboardScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                "Ready to Crush Today’s Goal?",
+                AppStrings.readyToCrushTodayGoal,
                 style: TextStyle(
                   fontSize: 18,
                   color: Colors.white,
@@ -50,7 +51,7 @@ class DashboardScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Tap To Claim",
+                          AppStrings.tapToClaim,
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.white,
@@ -58,7 +59,7 @@ class DashboardScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "Today’s Boost!",
+                          AppStrings.todaysBoost,
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.white,
@@ -74,7 +75,7 @@ class DashboardScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(
-                "Your Progress This Week",
+                AppStrings.yourProgressThisWeek,
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
               SingleChildScrollView(
@@ -82,17 +83,17 @@ class DashboardScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     ProgrssContainer(
-                      title: "Active Goals",
+                      title: AppStrings.activeGoals,
                       value: 10,
                       icon: SvgPicture.asset("assets/icons/Group (1).svg"),
                     ),
                     ProgrssContainer(
-                      title: "Coins Earned",
+                      title: AppStrings.coinsEarned,
                       value: 500,
                       icon: SvgPicture.asset("assets/icons/Group (2).svg"),
                     ),
                     ProgrssContainer(
-                      title: "Badges",
+                      title: AppStrings.badges,
                       value: 10,
                       icon: SvgPicture.asset("assets/icons/Group (3).svg"),
                     ),
@@ -105,7 +106,7 @@ class DashboardScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Ongoing Bets",
+                    AppStrings.ongoingBets,
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                   SvgPicture.asset("assets/icons/arrow-right.svg"),
@@ -124,7 +125,7 @@ class DashboardScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Community",
+                    AppStrings.community,
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                   SvgPicture.asset("assets/icons/arrow-right.svg"),
@@ -135,23 +136,23 @@ class DashboardScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     CommunityContainer(
-                      title: "Loss weight",
+                      title: AppStrings.lossWeight,
                       icon: SvgPicture.asset("assets/icons/Mask group.svg"),
                     ),
                     CommunityContainer(
-                      title: "Lifting",
+                      title: AppStrings.lifting,
                       icon: SvgPicture.asset("assets/icons/Vector.svg"),
                     ),
                     CommunityContainer(
-                      title: "Strength",
+                      title: AppStrings.strength,
                       icon: SvgPicture.asset("assets/icons/Group (4).svg"),
                     ),
                     CommunityContainer(
-                      title: "Cycling",
+                      title: AppStrings.cycling,
                       icon: SvgPicture.asset("assets/icons/Group (5).svg"),
                     ),
                     CommunityContainer(
-                      title: "Running",
+                      title: AppStrings.running,
                       icon: Icon(Icons.star),
                     ),
                   ],
