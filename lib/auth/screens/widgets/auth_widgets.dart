@@ -15,14 +15,14 @@ class AuthHeader extends StatelessWidget {
         Text(
           AppStrings.signInToApp,
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
             color: AppColors.textPrimary,
           ),
         ),
         Text(
           AppStrings.appTitle,
-          style: TextStyle(fontSize: 14, color: AppColors.textPrimary),
+          style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
         ),
         SizedBox(height: 20),
       ],
@@ -30,56 +30,121 @@ class AuthHeader extends StatelessWidget {
   }
 }
 
-class TextFieldWidget extends StatelessWidget {
+class TextFieldWidget extends StatefulWidget {
   final String labelText;
   final String hintText;
   final Widget? icon;
   final bool isPassword;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
 
   const TextFieldWidget({
     required this.labelText,
     required this.hintText,
     this.icon,
     this.isPassword = false,
+    this.controller,
+    this.validator,
     super.key,
   });
 
   @override
+  State<TextFieldWidget> createState() => _TextFieldWidgetState();
+}
+
+class _TextFieldWidgetState extends State<TextFieldWidget> {
+  late bool _obscureText;
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = widget.isPassword;
+    _focusNode.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final bool isFocused = _focusNode.hasFocus;
     return Column(
       children: [
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            labelText,
-            style: TextStyle(color: AppColors.textPrimary),
+            widget.labelText,
+            style: TextStyle(
+              color: AppColors.textPrimary,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
+        SizedBox(height: 5),
         Container(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(3),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: AppColors.primary,
+            borderRadius: BorderRadius.circular(18),
+            color: isFocused
+                ? AppColors.textOrange.withValues(alpha: .2)
+                : Colors.transparent,
           ),
-          child: Row(
-            children: [
-              icon ?? const Icon(Icons.person, color: AppColors.textPrimary),
-              SizedBox(width: 5),
-              Expanded(
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: hintText,
-                    border: InputBorder.none,
-                    hintStyle: TextStyle(color: AppColors.textPrimary),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              color: AppColors.secondary,
+              border: Border.all(
+                color: isFocused ? AppColors.buttonOrange : Colors.transparent,
+                width: 1,
+              ),
+            ),
+            child: Row(
+              children: [
+                widget.icon ??
+                    const Icon(Icons.person, color: AppColors.textPrimary),
+                SizedBox(width: 8),
+                Expanded(
+                  child: TextFormField(
+                    controller: widget.controller,
+                    focusNode: _focusNode,
+                    validator: widget.validator,
+                    obscureText: _obscureText,
+                    obscuringCharacter: '*',
+                    decoration: InputDecoration(
+                      hintText: widget.hintText,
+                      border: InputBorder.none,
+                      hintStyle: TextStyle(
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    style: TextStyle(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-              ),
-              if (isPassword)
-                IconButton(
-                  icon: Icon(Icons.visibility, color: AppColors.textPrimary),
-                  onPressed: () {},
-                ),
-            ],
+                if (widget.isPassword)
+                  IconButton(
+                    icon: Icon(
+                      _obscureText ? Icons.visibility_off : Icons.visibility,
+                      color: AppColors.textPrimary,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                  ),
+              ],
+            ),
           ),
         ),
       ],
@@ -102,16 +167,20 @@ class ButtonWidget extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onPressed,
-        child: Text(
-          labelText,
-          style: TextStyle(color: AppColors.textPrimary, fontSize: 16),
-        ),
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.all(25),
+          padding: EdgeInsets.all(20),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
           ),
           backgroundColor: AppColors.buttonOrange,
+        ),
+        child: Text(
+          labelText,
+          style: TextStyle(
+            color: AppColors.textPrimary,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );
