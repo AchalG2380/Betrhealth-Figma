@@ -15,14 +15,18 @@ class AuthHeader extends StatelessWidget {
         Text(
           AppStrings.signInToApp,
           style: TextStyle(
-            fontSize: 24,
+            fontSize: 26,
             fontWeight: FontWeight.bold,
             color: AppColors.textPrimary,
           ),
         ),
         Text(
           AppStrings.appTitle,
-          style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
+          style: TextStyle(
+            fontSize: 16,
+            color: AppColors.textSecondary,
+            fontWeight: FontWeight.w500,
+          ),
         ),
         SizedBox(height: 20),
       ],
@@ -135,7 +139,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                   IconButton(
                     icon: Icon(
                       _obscureText ? Icons.visibility_off : Icons.visibility,
-                      color: AppColors.textPrimary,
+                      color: AppColors.textGrey,
                     ),
                     onPressed: () {
                       setState(() {
@@ -163,8 +167,17 @@ class ButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      padding: EdgeInsets.zero,
       width: double.infinity,
+      decoration: BoxDecoration(
+        gradient: RadialGradient(
+          center: Alignment.centerLeft,
+          radius: 7,
+          colors: [AppColors.buttonOrange, AppColors.textOrange],
+        ),
+        borderRadius: BorderRadius.circular(14),
+      ),
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
@@ -172,7 +185,8 @@ class ButtonWidget extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
           ),
-          backgroundColor: AppColors.buttonOrange,
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
         ),
         child: Text(
           labelText,

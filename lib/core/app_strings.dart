@@ -18,6 +18,11 @@ class AppStrings {
   static const String termsW = "By continuing, you agree to our ";
   static const String termsO = "Terms &conditions, Privacy & Cookie Policy.";
 
+  static const String emailIsRequired = "Email is required";
+  static const String enteraValidEmail = "Enter a valid email";
+  static const String passwordIsRequired = "Password is required";
+  static const String minimum6characters = "Minimum 6 characters";
+
   static const String user = "Alex Watson";
   static const String heyUser = "Hey Alexandra07 🙌";
   static const String readyToCrushTodayGoal = "Ready to Crush Today's Goal?";

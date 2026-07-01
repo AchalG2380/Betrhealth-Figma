@@ -34,10 +34,10 @@ class SigninScreen extends StatelessWidget {
                         icon: SvgPicture.asset('assets/icons/email.svg'),
                         validator: (val) {
                           if (val == null || val.isEmpty) {
-                            return "Email is required";
+                            return AppStrings.emailIsRequired;
                           }
                           if (!GetUtils.isEmail(val)) {
-                            return "Enter a valid email";
+                            return AppStrings.enteraValidEmail;
                           }
                           return null;
                         },
@@ -55,9 +55,10 @@ class SigninScreen extends StatelessWidget {
                         validator: (val) {
                           // <-- Add validation
                           if (val == null || val.isEmpty) {
-                            return 'Password is required';
+                            return AppStrings.passwordIsRequired;
                           }
-                          if (val.length < 6) return 'Minimum 6 characters';
+                          if (val.length < 6)
+                            return AppStrings.minimum6characters;
                           return null;
                         },
                       ),
@@ -69,6 +70,7 @@ class SigninScreen extends StatelessWidget {
                             AppStrings.forgotPassword,
                             style: TextStyle(
                               color: AppColors.textOrange,
+                              fontWeight: FontWeight.w500,
                               decoration: TextDecoration.underline,
                               decorationColor: AppColors.textOrange,
                               decorationThickness: 1.0,
@@ -99,7 +101,10 @@ class SigninScreen extends StatelessWidget {
                 children: [
                   Text(
                     AppStrings.dontHaveAnAccount,
-                    style: TextStyle(color: AppColors.textSecondary),
+                    style: TextStyle(
+                      color: AppColors.textSecondary,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   TextButton(
                     onPressed: () {
@@ -109,6 +114,7 @@ class SigninScreen extends StatelessWidget {
                       AppStrings.signUp,
                       style: TextStyle(
                         color: AppColors.textOrange,
+                        fontWeight: FontWeight.w500,
                         decoration: TextDecoration.underline,
                         decorationColor: AppColors.textOrange,
                         decorationThickness: 1.0,

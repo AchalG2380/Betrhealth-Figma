@@ -223,7 +223,7 @@ class _NotchedBarPainter extends CustomPainter {
     path.close();
 
     // Draw shadow
-    canvas.drawShadow(path, Colors.black.withValues(alpha: 0.3), 8, true);
+    canvas.drawShadow(path, AppColors.black.withValues(alpha: 0.3), 8, true);
 
     // Fill the bar
     final Paint paint = Paint()..color = AppColors.textPrimary;
@@ -254,7 +254,7 @@ class CustomFAB extends StatelessWidget {
             borderRadius: BorderRadius.circular(26),
             gradient: RadialGradient(
               center: Alignment.centerLeft,
-              radius: 1.25,
+              radius: 1.1,
               colors: [AppColors.gradientStart, AppColors.gradientEnd],
             ),
             boxShadow: [
@@ -341,7 +341,7 @@ class CommunityContainer extends StatelessWidget {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.all(10),
+          margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           height: 80,
           width: 80,
           decoration: BoxDecoration(
@@ -352,12 +352,12 @@ class CommunityContainer extends StatelessWidget {
             ),
             color: AppColors.textPrimary.withValues(alpha: .04),
           ),
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(12),
           child: icon,
         ),
         Text(
           title,
-          style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
+          style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
         ),
       ],
     );
@@ -461,7 +461,7 @@ class OngoingCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                         gradient: RadialGradient(
                           center: Alignment.centerLeft,
-                          radius: 1.2,
+                          radius: 1,
                           colors: [
                             AppColors.gradientStart,
                             AppColors.gradientEnd,
@@ -521,7 +521,10 @@ class OngoingCard extends StatelessWidget {
                   ),
                   child: Text(
                     "Place Bet",
-                    style: TextStyle(color: AppColors.textPrimary),
+                    style: TextStyle(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ),
@@ -537,7 +540,10 @@ class OngoingCard extends StatelessWidget {
                   ),
                   child: Text(
                     "Bet Against",
-                    style: TextStyle(color: AppColors.textPrimary),
+                    style: TextStyle(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ),

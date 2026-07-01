@@ -15,6 +15,7 @@ class AppColors {
   static const Color textGrey = Color.fromRGBO(83, 100, 113, 1);
 
   static const Color background = Color.fromRGBO(39, 22, 67, 1.0);
+  static const Color black = Colors.black;
 
   static const Color gradientStart = Color.fromRGBO(177, 66, 115, 1);
   static const Color gradientEnd = Color.fromRGBO(93, 41, 138, 1);
