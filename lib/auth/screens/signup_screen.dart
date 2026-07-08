@@ -6,6 +6,7 @@ import '../screens/widgets/auth_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../core/app_strings.dart';
 import '../presentation/controllers/signup_controller.dart';
+import '../../core/utils/validators.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -32,15 +33,7 @@ class SignupScreen extends StatelessWidget {
                         hintText: AppStrings.name,
                         controller: controller.nameController,
                         icon: SvgPicture.asset("assets/icons/Group.svg"),
-                        validator: (val) {
-                          if (val == null || val.isEmpty) {
-                            return 'Name is required';
-                          }
-                          if (val.length < 2) {
-                            return 'Name must be at least 2 characters';
-                          }
-                          return null;
-                        },
+                        validator: Validators.name,
                       ),
                       SizedBox(height: 14),
                       TextFieldWidget(
@@ -48,53 +41,45 @@ class SignupScreen extends StatelessWidget {
                         hintText: AppStrings.email,
                         controller: controller.emailController,
                         icon: SvgPicture.asset("assets/icons/email.svg"),
-                        validator: (val) {
-                          if (val == null || val.isEmpty) {
-                            return AppStrings.emailIsRequired;
-                          }
-                          if (!val.contains('@')) return 'Invalid email';
-                          return null;
-                        },
+                        validator: Validators.email,
                       ),
                       SizedBox(height: 14),
-                      TextFieldWidget(
-                        labelText: AppStrings.password,
-                        hintText: AppStrings.password,
-                        controller: controller.passwordController,
-                        icon: SvgPicture.asset(
-                          "assets/icons/lock password.svg",
+                      Obx(
+                        () => TextFieldWidget(
+                          labelText: AppStrings.password,
+                          hintText: AppStrings.password,
+                          controller: controller.passwordController,
+                          icon: SvgPicture.asset(
+                            "assets/icons/lock password.svg",
+                          ),
+                          isPassword: true,
+                          obscureText: !controller.isPasswordVisible.value,
+                          onToggleVisibility:
+                              controller.togglePasswordVisibility,
+                          validator: Validators.password,
                         ),
-                        validator: (val) {
-                          // <-- Add validation
-                          if (val == null || val.isEmpty) {
-                            return AppStrings.passwordIsRequired;
-                          }
-                          if (val.length < 6) {
-                            return AppStrings.minimum6characters;
-                          }
-                          return null;
-                        },
-                        isPassword: true,
                       ),
                       SizedBox(height: 14),
-                      TextFieldWidget(
-                        labelText: AppStrings.confirmPassword,
-                        hintText: AppStrings.password,
-                        controller: controller.confirmPasswordController,
-                        icon: SvgPicture.asset(
-                          "assets/icons/lock password.svg",
+                      Obx(
+                        () => TextFieldWidget(
+                          labelText: AppStrings.confirmPassword,
+                          hintText: AppStrings.password,
+                          controller: controller.confirmPasswordController,
+                          icon: SvgPicture.asset(
+                            "assets/icons/lock password.svg",
+                          ),
+                          isPassword: true,
+                          obscureText:
+                              !controller.isConfirmPasswordVisible.value,
+                          onToggleVisibility:
+                              controller.toggleConfirmPasswordVisibility,
+                          validator: (val) {
+                            return Validators.confirmPassword(
+                              val,
+                              controller.passwordController.text,
+                            );
+                          },
                         ),
-                        validator: (val) {
-                          // <-- Add validation
-                          if (val == null || val.isEmpty) {
-                            return 'Confirm Password is required';
-                          }
-                          if (val != controller.passwordController.text) {
-                            return 'Passwords do not match';
-                          }
-                          return null;
-                        },
-                        isPassword: true,
                       ),
                       SizedBox(height: 10),
                       Row(
@@ -155,7 +140,7 @@ class SignupScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsetsGeometry.all(8),
+              padding: EdgeInsets.all(8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

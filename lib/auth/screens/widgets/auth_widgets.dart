@@ -39,6 +39,8 @@ class TextFieldWidget extends StatefulWidget {
   final String hintText;
   final Widget? icon;
   final bool isPassword;
+  final bool obscureText;
+  final VoidCallback? onToggleVisibility;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
 
@@ -47,6 +49,8 @@ class TextFieldWidget extends StatefulWidget {
     required this.hintText,
     this.icon,
     this.isPassword = false,
+    this.obscureText = false,
+    this.onToggleVisibility,
     this.controller,
     this.validator,
     super.key,
@@ -57,13 +61,11 @@ class TextFieldWidget extends StatefulWidget {
 }
 
 class _TextFieldWidgetState extends State<TextFieldWidget> {
-  late bool _obscureText;
   final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    _obscureText = widget.isPassword;
     _focusNode.addListener(() {
       setState(() {});
     });
@@ -119,7 +121,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                     controller: widget.controller,
                     focusNode: _focusNode,
                     validator: widget.validator,
-                    obscureText: _obscureText,
+                    obscureText: widget.obscureText,
                     obscuringCharacter: '*',
                     decoration: InputDecoration(
                       hintText: widget.hintText,
@@ -138,14 +140,10 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                 if (widget.isPassword)
                   IconButton(
                     icon: Icon(
-                      _obscureText ? Icons.visibility_off : Icons.visibility,
+                      widget.obscureText ? Icons.visibility_off : Icons.visibility,
                       color: AppColors.textGrey,
                     ),
-                    onPressed: () {
-                      setState(() {
-                        _obscureText = !_obscureText;
-                      });
-                    },
+                    onPressed: widget.onToggleVisibility,
                   ),
               ],
             ),

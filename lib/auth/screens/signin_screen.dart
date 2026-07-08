@@ -6,6 +6,7 @@ import '../screens/widgets/auth_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../core/app_strings.dart';
 import '../presentation/controllers/login_controller.dart';
+import '../../core/utils/validators.dart';
 
 class SigninScreen extends StatelessWidget {
   const SigninScreen({super.key});
@@ -32,35 +33,23 @@ class SigninScreen extends StatelessWidget {
                         hintText: AppStrings.email,
                         controller: controller.emailController,
                         icon: SvgPicture.asset('assets/icons/email.svg'),
-                        validator: (val) {
-                          if (val == null || val.isEmpty) {
-                            return AppStrings.emailIsRequired;
-                          }
-                          if (!GetUtils.isEmail(val)) {
-                            return AppStrings.enteraValidEmail;
-                          }
-                          return null;
-                        },
+                        validator: Validators.email,
                       ),
                       SizedBox(height: 20),
-                      TextFieldWidget(
-                        labelText: AppStrings.password,
-                        hintText: AppStrings.password,
-                        controller: controller
-                            .passwordController, // <-- Connect controller
-                        icon: SvgPicture.asset(
-                          'assets/icons/lock password.svg',
+                      Obx(
+                        () => TextFieldWidget(
+                          labelText: AppStrings.password,
+                          hintText: AppStrings.password,
+                          controller: controller.passwordController,
+                          icon: SvgPicture.asset(
+                            'assets/icons/lock password.svg',
+                          ),
+                          isPassword: true,
+                          obscureText: !controller.isPasswordVisible.value,
+                          onToggleVisibility:
+                              controller.togglePasswordVisibility,
+                          validator: Validators.password,
                         ),
-                        isPassword: true,
-                        validator: (val) {
-                          // <-- Add validation
-                          if (val == null || val.isEmpty) {
-                            return AppStrings.passwordIsRequired;
-                          }
-                          if (val.length < 6)
-                            return AppStrings.minimum6characters;
-                          return null;
-                        },
                       ),
                       Align(
                         alignment: Alignment.centerRight,
@@ -95,7 +84,7 @@ class SigninScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsetsGeometry.all(8),
+              padding: EdgeInsets.all(8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

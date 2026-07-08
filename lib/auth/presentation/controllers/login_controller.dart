@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import '../../../../core/services/database_helper.dart';
 import '../../../dashboard/screens/dashboard_screen.dart';
 import '../../../core/controllers/user_controller.dart';
+import '../../../core/utils/hash_utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
   final emailController = TextEditingController();
@@ -23,11 +25,13 @@ class LoginController extends GetxController {
 
     isLoading.value = true;
 
-    final email = emailController.text.trim();
-    final password = passwordController.text.trim();
+    final email = emailController.text.trim().toLowerCase();
+    final hashedPassword = HashUtils.hashPassword(
+      passwordController.text.trim(),
+    );
 
     // Query the database
-    final user = await _db.getUser(email, password);
+    final user = await _db.getUser(email, hashedPassword);
 
     isLoading.value = false;
 
@@ -36,6 +40,9 @@ class LoginController extends GetxController {
       final userCtrl = Get.find<UserController>();
       userCtrl.setUser(user.name);
       // Login success → go to dashboard
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('isLoggedIn', true);
+      await prefs.setString('userEmail', email);
       Get.offAll(() => const DashboardScreen());
     } else {
       Get.snackbar(

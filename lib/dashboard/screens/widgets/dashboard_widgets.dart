@@ -275,12 +275,12 @@ class CustomFAB extends StatelessWidget {
   }
 }
 
-class ProgrssContainer extends StatelessWidget {
+class ProgressContainer extends StatelessWidget {
   final String title;
   final int value;
   final Widget icon;
 
-  const ProgrssContainer({
+  const ProgressContainer({
     required this.title,
     required this.value,
     required this.icon,

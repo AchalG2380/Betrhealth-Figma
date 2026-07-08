@@ -95,17 +95,17 @@ class DashboardScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    ProgrssContainer(
+                    ProgressContainer(
                       title: AppStrings.activeGoals,
                       value: 10,
                       icon: SvgPicture.asset("assets/icons/Group (1).svg"),
                     ),
-                    ProgrssContainer(
+                    ProgressContainer(
                       title: AppStrings.coinsEarned,
                       value: 500,
                       icon: SvgPicture.asset("assets/icons/Group (2).svg"),
                     ),
-                    ProgrssContainer(
+                    ProgressContainer(
                       title: AppStrings.badges,
                       value: 10,
                       icon: SvgPicture.asset("assets/icons/Group (3).svg"),
