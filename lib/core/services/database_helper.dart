@@ -83,4 +83,19 @@ class DatabaseHelper {
     );
     return result.isNotEmpty;
   }
+
+  // QUERY — find user by email (called on Auto-login / session restore)
+  Future<UserModel?> getUserByEmail(String email) async {
+    final db = await database;
+    final result = await db.query(
+      'users',
+      where: 'email = ?',
+      whereArgs: [email],
+    );
+
+    if (result.isNotEmpty) {
+      return UserModel.fromMap(result.first);
+    }
+    return null;
+  }
 }

@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dashboard/screens/dashboard_screen.dart';
+import 'core/services/database_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +20,17 @@ void main() async {
   final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
 
   Get.put(UserController());
+
+  if (isLoggedIn) {
+    final email = prefs.getString('userEmail');
+    if (email != null) {
+      final user = await DatabaseHelper.instance.getUserByEmail(email);
+      if (user != null) {
+        Get.find<UserController>().setUser(user.name);
+      }
+    }
+  }
+
   runApp(MyApp(isLoggedIn: isLoggedIn));
 }
 

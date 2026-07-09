@@ -8,8 +8,10 @@ void main() {
   ) async {
     await tester.pumpWidget(GetMaterialApp(home: const SigninScreen()));
 
-    // Tap the Sign In button without entering anything
-    await tester.tap(find.text('Sign In'));
+    // Scroll the button into view to ensure it is hit-testable in SingleChildScrollView
+    final buttonFinder = find.text('Sign In');
+    await tester.ensureVisible(buttonFinder);
+    await tester.tap(buttonFinder);
     await tester.pump();
 
     // Expect validation errors to appear
